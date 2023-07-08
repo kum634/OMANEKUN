@@ -11,8 +11,9 @@ class auth extends common {
 
 	public function __construct() {
 
-    if (!$this->con) $this->$con = $this->conect();
-
+    if (!$this->con) $this->conect();
+    // if (!$this->con) $this->con = $this->conect();
+    
     $this->csrf_set();
     $this->csrf_chk();
 		$this->get_chk();
@@ -138,7 +139,7 @@ class auth extends common {
       $res = $this->select_users($arr, true, true);
       dbg(dbg_type, $res, basename(__FILE__).__LINE__);
       if (is_string($res)) return $res;
-			if (!password_verify($password, $res["password"])) return 0;
+			if (empty($res["password"]) || !password_verify($password, $res["password"])) return 0;
       dbg(dbg_type, $res, basename(__FILE__).__LINE__);
 
 			// echo '古いセッションID: '.session_id()."\n".basename(__FILE__).__LINE__."\n";

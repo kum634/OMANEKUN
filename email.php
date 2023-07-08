@@ -20,7 +20,7 @@ $title = get_title(basename(__FILE__, ".php"));
 ?>
 <?php require_once('parts/auth_meta.php'); ?>
 <?php require_once('parts/auth_header.php'); ?>
-		<?php if ($bs_alert != '') echo $bs_alert; ?>
+		<?php if (!empty($bs_alert) && $bs_alert != '') echo $bs_alert; ?>
 		<h2 class="font-weight-normal">パスワードの再発行</h2>
 		<div class="form_login_area">
 			<form class="form-email" id="form-email" name="form-email" method="POST" action="">

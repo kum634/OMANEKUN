@@ -43,7 +43,7 @@ function dbg($type, $value, $position = false, $ext = false) {
     if ($position !== false) $msg.= $position."\n";
     $msg.= print_r($value, true)."\n";
 
-    error_log($msg, 3, './log/'.date("YmdHis").'_debug.txt');
+    error_log($msg, 3, './log/'.date("Y-m-d_H-i-s").'_debug.txt');
     return;
   }
 

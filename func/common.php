@@ -77,7 +77,9 @@ class common {
 
   public function __construct() {
 
-    if (!$this->con) $this->$con = $this->conect();
+    if (!$this->con) $this->conect();
+    // if (!$this->con) $this->con = $this->conect();
+
     $this->create_users_table();
     $this->create_auto_login_table();
     $this->create_password_resets_table();
@@ -390,7 +392,7 @@ class common {
   */
 	public function del_user($ID) {
 
-		$sql= "DELETE FROM users WHERE ID ='{$ID}' ";
+		$sql= "DELETE FROM users WHERE ID = :ID ";
     $stmt = $this->con->prepare ($sql);
     $stmt->bindvalue(':ID', $ID);
     try {
@@ -412,7 +414,7 @@ class common {
   */
 	public function del_all_requests($UID) {
 
-		$sql= "DELETE FROM requests WHERE UID = '{$ID}'";
+		$sql= "DELETE FROM requests WHERE UID = :ID";
     $stmt = $this->con->prepare ($sql);
     $stmt->bindvalue(':ID', $UID);
     try {

@@ -168,51 +168,74 @@ class page  {
 	public function post_data_ag($insert = false) {
 
 		dbg(dbg_type, $_POST, basename(__FILE__).__LINE__);
+
+		
+		$notices = (!empty($_POST[ "notices" ])) ? $_POST[ "notices" ] : '';
+		$maintenance_type = (!empty($_POST[ "maintenance_type" ])) ? $_POST[ "maintenance_type" ] : '';
+		$storage_date_y = (!empty($_POST[ "storage_date_y" ])) ? $_POST[ "storage_date_y" ] : '';
+		$storage_date_m = (!empty($_POST[ "storage_date_m" ])) ? $_POST[ "storage_date_m" ] : '';
+		$storage_date_d = (!empty($_POST[ "storage_date_d" ])) ? $_POST[ "storage_date_d" ] : '';
+		$retrieval_date_y = (!empty($_POST[ "retrieval_date_y" ])) ? $_POST[ "retrieval_date_y" ] : '';
+		$retrieval_date_m = (!empty($_POST[ "retrieval_date_m" ])) ? $_POST[ "retrieval_date_m" ] : '';
+		$retrieval_date_d = (!empty($_POST[ "retrieval_date_d" ])) ? $_POST[ "retrieval_date_d" ] : '';
+		$last_name = (!empty($_POST[ "last_name" ])) ? $_POST[ "last_name" ] : '';
+		$first_name = (!empty($_POST[ "first_name" ])) ? $_POST[ "first_name" ] : '';
+		$tel = (!empty($_POST[ "tel" ])) ? $_POST[ "tel" ] : '';
+		$mailaddress = (!empty($_POST[ "mailaddress" ])) ? $_POST[ "mailaddress" ] : '';
+		$car_name = (!empty($_POST[ "car_name" ])) ? $_POST[ "car_name" ] : '';
+		$model = (!empty($_POST[ "model" ])) ? $_POST[ "model" ] : '';
+		$license = (!empty($_POST[ "license" ])) ? $_POST[ "license" ] : '';
+		$inspection_date_y = (!empty($_POST[ "inspection_date_y" ])) ? $_POST[ "inspection_date_y" ] : '';
+		$inspection_date_m = (!empty($_POST[ "inspection_date_m" ])) ? $_POST[ "inspection_date_m" ] : '';
+		$inspection_date_d = (!empty($_POST[ "inspection_date_d" ])) ? $_POST[ "inspection_date_d" ] : '';
+		$maintenance_detail = (!empty($_POST[ "maintenance_detail" ])) ? $_POST[ "maintenance_detail" ] : '';
+		$wash = (!empty($_POST[ "wash" ])) ? $_POST[ "wash" ] : '';
+		$clean = (!empty($_POST[ "clean" ])) ? $_POST[ "clean" ] : '';
+		$notices_detail = (!empty($_POST[ "notices_detail" ])) ? $_POST[ "notices_detail" ] : '';
+		$mode = (!empty($_POST[ "mode" ])) ? $_POST[ "mode" ] : '';
+
+
 		if ($insert === true) {
-			$notices = implode( ',', (array)$_POST[ "notices" ] );
+			$notices = implode( ',', (array)$notices );
 			dbg(dbg_type, $notices, basename(__FILE__).__LINE__);
-			$maintenance_type = implode( ',', (array)$_POST[ "maintenance_type" ] );
-			dbg(dbg_type, $maintenance_type, basename(__FILE__).__LINE__);
-		} else {
-			$notices = $_POST[ "notices" ];
-			dbg(dbg_type, $notices, basename(__FILE__).__LINE__);
-			$maintenance_type = $_POST[ "maintenance_type" ];
+			$maintenance_type = implode( ',', (array)$maintenance_type );
 			dbg(dbg_type, $maintenance_type, basename(__FILE__).__LINE__);
 		}
+
 		$arr = array(
-			'storage_date_y' => $_POST[ "storage_date_y" ],
-			'storage_date_m' => $_POST[ "storage_date_m" ],
-			'storage_date_d' => $_POST[ "storage_date_d" ],
-			'retrieval_date_y' => $_POST[ "retrieval_date_y" ],
-			'retrieval_date_m' => $_POST[ "retrieval_date_m" ],
-			'retrieval_date_d' => $_POST[ "retrieval_date_d" ],
-			'last_name' => $_POST["last_name"],
-			'first_name' => $_POST["first_name"],
-			'tel' => $_POST["tel"],
-			'mailaddress' => $_POST["mailaddress"],
-			'car_name' => $_POST["car_name"],
-			'model' => $_POST["model"],
-			'license' => $_POST["license"],
-			'inspection_date_y' => $_POST[ "inspection_date_y" ],
-			'inspection_date_m' => $_POST[ "inspection_date_m" ],
-			'inspection_date_d' => $_POST[ "inspection_date_d" ],
+			'storage_date_y' => $storage_date_y,
+			'storage_date_m' => $storage_date_m,
+			'storage_date_d' => $storage_date_d,
+			'retrieval_date_y' => $retrieval_date_y,
+			'retrieval_date_m' => $retrieval_date_m,
+			'retrieval_date_d' => $retrieval_date_d,
+			'last_name' => $last_name,
+			'first_name' => $first_name,
+			'tel' => $tel,
+			'mailaddress' => $mailaddress,
+			'car_name' => $car_name,
+			'model' => $model,
+			'license' => $license,
+			'inspection_date_y' => $inspection_date_y,
+			'inspection_date_m' => $inspection_date_m,
+			'inspection_date_d' => $inspection_date_d,
 			'maintenance_type' => $maintenance_type,
-			'maintenance_detail' => $_POST[ "maintenance_detail" ],
-			'wash' => $_POST[ "wash" ],
-			'clean' => $_POST[ "clean" ],
+			'maintenance_detail' => $maintenance_detail,
+			'wash' => $wash,
+			'clean' => $clean,
 			'notices' => $notices,
-			'notices_detail' => $_POST[ "notices_detail" ]
+			'notices_detail' => $notices_detail
 		);
 		dbg(dbg_type, $arr, basename(__FILE__).__LINE__);
-		$arr +=  array('storage_date' => $_POST[ "storage_date_y" ].'-'.$_POST[ "storage_date_m" ].'-'.$_POST[ "storage_date_d" ]);
-		$arr +=  array('inspection_date' => $_POST[ "inspection_date_y" ].'-'.$_POST[ "inspection_date_m" ].'-'.$_POST[ "inspection_date_d" ]);
-		$arr +=  array('retrieval_date' => $_POST[ "retrieval_date_y" ].'-'.$_POST[ "retrieval_date_m" ].'-'.$_POST[ "retrieval_date_d" ]);
+		$arr +=  array('storage_date' => $storage_date_y.'-'.$storage_date_m.'-'.$storage_date_d);
+		$arr +=  array('inspection_date' => $inspection_date_y.'-'.$inspection_date_m.'-'.$inspection_date_d);
+		$arr +=  array('retrieval_date' => $retrieval_date_y.'-'.$retrieval_date_m.'-'.$retrieval_date_d);
 
 		if ($arr['storage_date'] == '--') $arr['storage_date'] =  date("Y").'-'.date("m").'-'.date("d");
 		if ($arr['inspection_date'] == '--') $arr['inspection_date'] =  null;
 		if ($arr['retrieval_date'] == '--') $arr['retrieval_date'] =  null;
 
-		if ($_POST["mode"] == 'edit' && !empty($_POST["id"])) $arr +=  array('ID' => $_POST["id"]);
+		if ($mode == 'edit' && !empty($_POST["id"])) $arr +=  array('ID' => $_POST["id"]);
 		dbg(dbg_type, $arr, basename(__FILE__).__LINE__);
 
 		return $arr;
@@ -260,7 +283,7 @@ class page  {
 
 			$arr = $this->post_data_ag(true);
 			dbg(dbg_type, $arr, basename(__FILE__).__LINE__);
-			if ($_POST["mode"] == 'add') {
+			if (!empty($_POST["mode"]) && $_POST["mode"] == 'add') {
 			  $res = $this->page_con->add_requests($arr);
 				dbg(dbg_type, $res, basename(__FILE__).__LINE__);
 			  if ($res === 1) {
@@ -269,7 +292,7 @@ class page  {
 			    return bs_alert('エラーが発生しました。', false, $res);
 			  }
 			}
-			if ($_POST["mode"] == 'edit') {
+			if (!empty($_POST["mode"]) && $_POST["mode"] == 'edit') {
 			  $res = $this->page_con->edit_requests($arr);
 				dbg(dbg_type, $res, basename(__FILE__).__LINE__);
 			  if ($res === 1) {
@@ -372,8 +395,8 @@ class page  {
 			if ($_POST["password"] == "") return bs_alert('パスワードを入力してください。', false);
 			if ($this->page_con->UID == 1) return bs_alert('テスト用ユーザー情報は削除できません。', false);
 			$arr = array(
-        'ID' => $this->page_con->UID
-      );
+				'ID' => $this->page_con->UID
+			);
 			dbg(dbg_type, $arr, basename(__FILE__).__LINE__);
 			$row = $this->page_con->select_users($arr, true);
 			dbg(dbg_type, $row, basename(__FILE__).__LINE__);
@@ -382,7 +405,7 @@ class page  {
 			$res1 = $this->page_con->del_user($row["ID"]);
 			dbg(dbg_type, $res1, basename(__FILE__).__LINE__);
 			if ($res1 != 1 ) return bs_alert('退会処理に失敗しました。', false, $res1);
-			$res2 = $this->page_con->del_all_requests(row["ID"]);
+			$res2 = $this->page_con->del_all_requests($row["ID"]);
 			dbg(dbg_type, $res2, basename(__FILE__).__LINE__);
 			if ($res2 != 1 ) return bs_alert('退会処理に失敗しました。', false, $res2);
 

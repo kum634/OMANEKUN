@@ -23,7 +23,7 @@ $title = get_title(basename(__FILE__, ".php"));
 ?>
 <?php require_once('parts/auth_meta.php'); ?>
 <?php require_once('parts/auth_header.php'); ?>
-		<?php if ($bs_alert != '') echo '<div class="alert alert-warning">'.$bs_alert.'</div>'; ?>
+		<?php if (!empty($bs_alert) && $bs_alert != '') echo '<div class="alert alert-warning">'.$bs_alert.'</div>'; ?>
 		<h2 class="font-weight-normal">パスワードの初期化</h2>
 		<div class="form_login_area">
 			<form class="form-reset" id="form-reset" name="form-email"  method="POST" action="">

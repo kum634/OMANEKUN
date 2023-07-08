@@ -11,7 +11,7 @@ $title = get_title(basename(__FILE__, ".php"));
 <?php require_once('parts/header.php'); ?>
 <h1>退会</h1>
 <?php
-if ($bs_alert != '') {
+if (!empty($bs_alert) && $bs_alert != '') {
   echo $bs_alert;
 }
 ?>

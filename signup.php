@@ -28,12 +28,12 @@ $title = get_title(basename(__FILE__, ".php"));
 <?php require_once('parts/auth_meta.php'); ?>
 <?php require_once('parts/auth_header.php'); ?>
     <?php
-    if($_SESSION["withdrawal"] == 1){
+    if(!empty($_SESSION["withdrawal"]) && $_SESSION["withdrawal"] == 1){
       dbg(dbg_type, $_SESSION, basename(__FILE__).__LINE__);
       echo bs_alert('ご利用ありがとうございました。', true);
       unset($_SESSION["withdrawal"]);
     }
-    if ($bs_alert != '') echo $bs_alert;
+    if (!empty($bs_alert) && $bs_alert != '') echo $bs_alert;
     ?>
     <h2 class="font-weight-normal">ユーザー登録</h2>
     <div class="form_login_area">

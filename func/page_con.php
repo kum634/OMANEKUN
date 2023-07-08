@@ -12,13 +12,14 @@ class page_con extends common {
 
 		parent::__construct();
 
-		if (!$this->con) $this->$con = $this->conect();
+		if (!$this->con) $this->conect();
+		// if (!$this->con) $this->con = $this->conect();
 
 		$this->session_expires_chk();
 		$this->login_chk();
 
-    $this->csrf_set();
-    $this->csrf_chk();
+		$this->csrf_set();
+		$this->csrf_chk();
 		$this->get_chk();
 		$this->arr_chk($_POST);
 
@@ -45,6 +46,8 @@ class page_con extends common {
 	*/
 
 	public function get_weekly_requests() {
+
+		$obj = null;
 
 		$sql= "SELECT * FROM requests WHERE visible = '1'";
 		$sql.= " AND UID = '".$this->UID."'";
@@ -340,7 +343,7 @@ class page_con extends common {
 				dbg(dbg_type, __METHOD__.ng, basename(__FILE__).__LINE__);
 				$error = $e->getMessage();
 				dbg(dbg_type, $error, basename(__FILE__).__LINE__);
-			return $error;
+				return $error;
 			}
 			dbg(dbg_type, __METHOD__.ok, basename(__FILE__).__LINE__);
 			return 1;

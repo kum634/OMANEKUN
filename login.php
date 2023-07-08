@@ -6,7 +6,12 @@ $bs_alert = '';
 $error_message = '';
 
 if (isset( $_POST["sub"])) {
-	$res = $auth->login($_POST["username"], $_POST["password"], $_POST["autologin"]);
+
+	$username = (!empty($_POST["username"])) ? $_POST["username"] : '';
+	$password = (!empty($_POST["password"])) ? $_POST["password"] : '';
+	$autologin = (!empty( $_POST["autologin"])) ? $_POST["autologin"] : '';
+
+	$res = $auth->login($username, $password, $autologin);
 	if ($res == 0) $error_message = 'ユーザー名かパスワードが正しくありません。';
 	else $bs_alert = $res;
 }
@@ -20,7 +25,7 @@ $title = get_title(basename(__FILE__, ".php"));
 			echo bs_alert('パスワードを変更しました。', true);
 			unset($_SESSION["reset"]);
 		}
-		if ($bs_alert != '') echo $bs_alert;
+		if (!empty($bs_alert) && $bs_alert != '') echo $bs_alert;
 		?>
 		<h2 class="font-weight-normal">ログイン</h2>
 		<div class="form_login_area">

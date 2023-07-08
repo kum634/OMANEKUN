@@ -10,7 +10,7 @@ $title = get_title(basename(__FILE__, ".php"));
 <?php require_once('parts/header.php'); ?>
 <h1>今週( <?php $page->the_weekly() ?> )の作業予定</h1>
 <?php
-if ($bs_alert != '') {
+if (!empty($bs_alert) && $bs_alert != '') {
   echo $bs_alert;
   echo "<script type='text/javascript'>setTimeout(function(){location.href = location.href},2000);</script>";
 }

@@ -11,7 +11,7 @@ $title = get_title(basename(__FILE__, ".php"));
 <?php require_once('parts/header.php'); ?>
 <h1>整備履歴</h1>
 <?php
-if ($bs_alert != '') {
+if (!empty($bs_alert) && $bs_alert != '') {
   echo $bs_alert;
 echo "<script type='text/javascript'>setTimeout(function(){location.href = location.href},2000);</script>";
 }
@@ -37,7 +37,7 @@ echo "<script type='text/javascript'>setTimeout(function(){location.href = locat
    </div>
    <div class="result">
      <?php
-     if ($_POST["mode"] == 'search') $page->the_search_get();
+     if (!empty($_POST["mode"]) && $_POST["mode"] == 'search') $page->the_search_get();
      else $page->the_all_get();
      ?>
    </div>
