@@ -303,7 +303,7 @@ class auth extends common {
       $phpmailer->isHTML(true); // HTMLを有効にする
       $phpmailer->XMailer = ' '; // ライブラリの署名を非表示にする
 
-			if ($phpmailer->send()) return bs_alert('入力したメールアドレス宛にメールを送信しました。', true);
+      if ($phpmailer->send()) return bs_alert('入力したメールアドレス宛にメールを送信しました。', true);
       else return bs_alert('メールの送信に失敗しました。', false);
   }
 
