@@ -277,15 +277,33 @@ class auth extends common {
   		$time = date( 'Y年m月d日 H時i分', $current );
       dbg(dbg_type, $time, basename(__FILE__).__LINE__);
 
-      $header = "from: ".from;
-      dbg(dbg_type, $header, basename(__FILE__).__LINE__);
-      if ($html_mail) $header .= "\r\n"."Content-Type: text/html;charset=ISO-2022-JP\nX-Mailer: PHP/".phpversion();
-      dbg(dbg_type, $header, basename(__FILE__).__LINE__);
       $mailto = $mailaddress;
       dbg(dbg_type, $mailto, basename(__FILE__).__LINE__);
       dbg(dbg_type, $subject, basename(__FILE__).__LINE__);
       dbg(dbg_type, $content, basename(__FILE__).__LINE__);
-			if (mb_send_mail($mailto, $subject, $content, $header)) return bs_alert('入力したメールアドレス宛にメールを送信しました。', true);
+
+      $phpmailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+      $phpmailer->isSMTP(); // SMTP を使用
+      $phpmailer->Host = smtp_host; //サーバーを指定
+      $phpmailer->SMTPAuth = smtp_smtpauth; // SMTP authentication を有効に
+      $phpmailer->Username = smtp_username;  // SMTP ユーザ名
+      $phpmailer->Password = smtp_password;  // SMTP パスワード
+      $phpmailer->SMTPSecure = smtp_smtpsecure;  // 暗号化
+      $phpmailer->Port = smtp_port; // ポートを指定
+      $phpmailer->CharSet = smtp_charset;
+      $phpmailer->Encoding = smtp_encoding;
+      
+      $phpmailer->Sender = smtp_username;  //Return-Pathの設定
+      $phpmailer->setFrom(smtp_username, $site_name); //差出人アドレス
+      $phpmailer->addAddress($mailto); //受信者アドレス
+      $phpmailer->Subject = $subject; //メール表題
+      $phpmailer->Body  = $content; //本文
+
+      $phpmailer->isHTML(true); // HTMLを有効にする
+      $phpmailer->XMailer = ' '; // ライブラリの署名を非表示にする
+
+			if ($phpmailer->send()) return bs_alert('入力したメールアドレス宛にメールを送信しました。', true);
       else return bs_alert('メールの送信に失敗しました。', false);
   }
 
